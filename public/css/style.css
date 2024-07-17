@@ -1,0 +1,748 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+    margin: 0;
+    background-color: #000;
+    color: #eee;
+    font-family: Poppins;
+    font-size: 12px;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    width: 1140px;
+    max-width: 80%;
+    margin: auto;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+}
+
+header a {
+    color: #eee;
+    margin-right: 40px;
+}
+
+
+/* carousel */
+
+.carousel {
+    height: 100vh;
+    margin-top: -50px;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel .list .item {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0 0 0 0;
+}
+
+.carousel .list .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel .list .item .content {
+    position: absolute;
+    top: 20%;
+    width: 1140px;
+    max-width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-right: 30%;
+    box-sizing: border-box;
+    color: #fff;
+    text-shadow: 0 5px 10px #0004;
+}
+
+.carousel .list .item .author {
+    font-weight: bold;
+    letter-spacing: 10px;
+}
+
+.carousel .list .item .title,
+.carousel .list .item .topic {
+    font-size: 5em;
+    font-weight: bold;
+    line-height: 1.3em;
+}
+
+.carousel .list .item .topic {
+    color: #f1683a;
+}
+
+.carousel .list .item .buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 130px);
+    grid-template-rows: 80px;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.carousel .list .item .buttons button {
+    border: none;
+    background-color: #eee;
+    letter-spacing: 3px;
+    font-family: Poppins;
+    font-weight: 500;
+}
+
+.carousel .list .item .buttons button:nth-child(2) {
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #eee;
+}
+
+
+/* thumbail */
+
+.thumbnail {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    width: max-content;
+    z-index: 100;
+    display: flex;
+    gap: 20px;
+}
+
+.thumbnail .item {
+    width: 150px;
+    height: 220px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.thumbnail .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.thumbnail .item .content {
+    color: #fff;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+}
+
+.thumbnail .item .content .title {
+    font-weight: 500;
+}
+
+.thumbnail .item .content .description {
+    font-weight: 300;
+}
+
+
+/* arrows */
+
+.arrows {
+    position: absolute;
+    top: 80%;
+    right: 52%;
+    z-index: 100;
+    width: 300px;
+    max-width: 30%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.arrows button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #eee4;
+    border: none;
+    color: #fff;
+    font-family: monospace;
+    font-weight: bold;
+    transition: .5s;
+}
+
+.arrows button:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+
+/* animation */
+
+.carousel .list .item:nth-child(1) {
+    z-index: 1;
+}
+
+
+/* animation text in first item */
+
+.carousel .list .item:nth-child(1) .content .author,
+.carousel .list .item:nth-child(1) .content .title,
+.carousel .list .item:nth-child(1) .content .topic,
+.carousel .list .item:nth-child(1) .content .des,
+.carousel .list .item:nth-child(1) .content .buttons {
+    transform: translateY(50px);
+    filter: blur(20px);
+    opacity: 0;
+    animation: showContent .5s 1s linear 1 forwards;
+}
+
+@keyframes showContent {
+    to {
+        transform: translateY(0px);
+        filter: blur(0px);
+        opacity: 1;
+    }
+}
+
+.carousel .list .item:nth-child(1) .content .title {
+    animation-delay: 1.2s!important;
+}
+
+.carousel .list .item:nth-child(1) .content .topic {
+    animation-delay: 1.4s!important;
+}
+
+.carousel .list .item:nth-child(1) .content .des {
+    animation-delay: 1.6s!important;
+}
+
+.carousel .list .item:nth-child(1) .content .buttons {
+    animation-delay: 1.8s!important;
+}
+
+
+/* create animation when next click */
+
+.carousel.next .list .item:nth-child(1) img {
+    width: 150px;
+    height: 220px;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    border-radius: 30px;
+    animation: showImage .5s linear 1 forwards;
+}
+
+@keyframes showImage {
+    to {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+}
+
+.carousel.next .thumbnail .item:nth-last-child(1) {
+    overflow: hidden;
+    animation: showThumbnail .5s linear 1 forwards;
+}
+
+.carousel.prev .list .item img {
+    z-index: 100;
+}
+
+@keyframes showThumbnail {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+}
+
+.carousel.next .thumbnail {
+    animation: effectNext .5s linear 1 forwards;
+}
+
+@keyframes effectNext {
+    from {
+        transform: translateX(150px);
+    }
+}
+
+
+/* running time */
+
+.carousel .time {
+    position: absolute;
+    z-index: 1000;
+    width: 0%;
+    height: 3px;
+    background-color: #f1683a;
+    left: 0;
+    top: 0;
+}
+
+.carousel.next .time,
+.carousel.prev .time {
+    animation: runningTime 3s linear 1 forwards;
+}
+
+@keyframes runningTime {
+    from {
+        width: 100%
+    }
+    to {
+        width: 0
+    }
+}
+
+
+/* prev click */
+
+.carousel.prev .list .item:nth-child(2) {
+    z-index: 2;
+}
+
+.carousel.prev .list .item:nth-child(2) img {
+    animation: outFrame 0.5s linear 1 forwards;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+@keyframes outFrame {
+    to {
+        width: 150px;
+        height: 220px;
+        bottom: 50px;
+        left: 50%;
+        border-radius: 20px;
+    }
+}
+
+.carousel.prev .thumbnail .item:nth-child(1) {
+    overflow: hidden;
+    opacity: 0;
+    animation: showThumbnail .5s linear 1 forwards;
+}
+
+.carousel.next .arrows button,
+.carousel.prev .arrows button {
+    pointer-events: none;
+}
+
+.carousel.prev .list .item:nth-child(2) .content .author,
+.carousel.prev .list .item:nth-child(2) .content .title,
+.carousel.prev .list .item:nth-child(2) .content .topic,
+.carousel.prev .list .item:nth-child(2) .content .des,
+.carousel.prev .list .item:nth-child(2) .content .buttons {
+    animation: contentOut 1.5s linear 1 forwards!important;
+}
+
+@keyframes contentOut {
+    to {
+        transform: translateY(-150px);
+        filter: blur(20px);
+        opacity: 0;
+    }
+}
+
+@media screen and (max-width: 678px) {
+    .carousel .list .item .content {
+        padding-right: 0;
+    }
+    .carousel .list .item .content .title {
+        font-size: 30px;
+    }
+}
+
+
+/* log2 */
+
+
+/* Full-width input fields */
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+
+/* Set a style for all button */
+
+button {
+    background-color: #f38c06;
+    color: rgb(7, 0, 0);
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+
+/* Extra styles for the cancel button */
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+
+/* Center the image and position the close button */
+
+.imglogin {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.login {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: #000000;
+    margin: 5% auto 15% auto;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+}
+
+
+/* The Close Button (x) */
+
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+
+/* Add Zoom Animation */
+
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+
+/* Change styles for span and cancel button on extra small screens */
+
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    /* style the container */
+    .container {
+        position: relative;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px 0 30px 0;
+    }
+    /* style inputs and link buttons */
+    input,
+    .btn {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 4px;
+        margin: 5px 0;
+        opacity: 0.85;
+        display: inline-block;
+        font-size: 17px;
+        line-height: 20px;
+        text-decoration: none;
+        /* remove underline from anchors */
+    }
+    input:hover,
+    .btn:hover {
+        opacity: 1;
+    }
+    /* add appropriate colors to fb, twitter and google buttons */
+    .fb {
+        background-color: #3B5998;
+        color: white;
+    }
+    .twitter {
+        background-color: #55ACEE;
+        color: white;
+    }
+    .google {
+        background-color: #dd4b39;
+        color: white;
+    }
+    /* style the submit button */
+    input[type=submit] {
+        background-color: #04AA6D;
+        color: white;
+        cursor: pointer;
+    }
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+    /* Two-column layout */
+    .col {
+        float: left;
+        width: 50%;
+        margin: auto;
+        padding: 0 50px;
+        margin-top: 6px;
+    }
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    /* vertical line */
+    .vl {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+        border: 2px solid #ddd;
+        height: 175px;
+    }
+    /* text inside the vertical line */
+    .vl-innertext {
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #f1f1f1;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        padding: 8px 10px;
+    }
+    /* hide some text on medium and large screens */
+    .hide-md-lg {
+        display: none;
+    }
+    /* bottom container */
+    .bottom-container {
+        text-align: center;
+        background-color: #666;
+        border-radius: 0px 0px 4px 4px;
+    }
+    /* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 650px) {
+        .col {
+            width: 100%;
+            margin-top: 0;
+        }
+        /* hide the vertical line */
+        .vl {
+            display: none;
+        }
+        /* show the hidden text on small screens */
+        .hide-md-lg {
+            display: block;
+            text-align: center;
+        }
+    }
+    /* 22
+body {
+font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+box-sizing: border-box;
+}
+
+/* style the container */
+    .container {
+        position: relative;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px 0 30px 0;
+    }
+    /* style inputs and link buttons */
+    input,
+    .btn {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 4px;
+        margin: 5px 0;
+        opacity: 0.85;
+        display: inline-block;
+        font-size: 17px;
+        line-height: 20px;
+        text-decoration: none;
+        /* remove underline from anchors */
+    }
+    input:hover,
+    .btn:hover {
+        opacity: 1;
+    }
+    /* add appropriate colors to fb, twitter and google buttons */
+    .fb {
+        background-color: #3B5998;
+        color: white;
+    }
+    .twitter {
+        background-color: #55ACEE;
+        color: white;
+    }
+    .google {
+        background-color: #dd4b39;
+        color: white;
+    }
+    /* style the submit button */
+    input[type=submit] {
+        background-color: #04AA6D;
+        color: white;
+        cursor: pointer;
+    }
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+    /* Two-column layout */
+    .col {
+        float: left;
+        width: 50%;
+        margin: auto;
+        padding: 0 50px;
+        margin-top: 6px;
+    }
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    /* vertical line */
+    .vl {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+        border: 2px solid #ddd;
+        height: 175px;
+    }
+    /* text inside the vertical line */
+    .vl-innertext {
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #f1f1f1;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        padding: 8px 10px;
+    }
+    /* hide some text on medium and large screens */
+    .hide-md-lg {
+        display: none;
+    }
+    /* bottom container */
+    .bottom-container {
+        text-align: center;
+        background-color: #666;
+        border-radius: 0px 0px 4px 4px;
+    }
+    /* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 650px) {
+        .col {
+            width: 100%;
+            margin-top: 0;
+        }
+        /* hide the vertical line */
+        .vl {
+            display: none;
+        }
+        /* show the hidden text on small screens */
+        .hide-md-lg {
+            display: block;
+            text-align: center;
+        }
+    }
+}
